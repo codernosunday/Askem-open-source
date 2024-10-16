@@ -14,7 +14,9 @@
   margin-top: 16px;
 
   img {
-    border-radius: 3px;
+
+    width: 164px;
+    height: 164px;
   }
 }
 
@@ -29,6 +31,7 @@
 .created {
   margin-top: 10px;
   text-align: center;
+
   p {
     font-family: monospace;
   }

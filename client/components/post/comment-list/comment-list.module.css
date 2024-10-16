@@ -23,6 +23,7 @@
   0% {
     background-color: var(--yellow);
   }
+
   100% {
     opacity: transparent;
   }

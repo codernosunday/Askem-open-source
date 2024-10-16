@@ -1,5 +1,7 @@
 .container {
   position: relative;
+  background-color: var(--BlackBG-100);
+
 }
 
 .tagContainer {
@@ -10,7 +12,7 @@
   padding-left: 12px;
 
   h2 {
-    color: var(--black-700);
+    color: var(--TextWhite-100);
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 1em;

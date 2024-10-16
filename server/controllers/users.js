@@ -56,12 +56,13 @@ exports.signup = async (req, res) => {
       });
     } else {
       return res.status(400).json({
-        message: 'There was a problem creating your account.'
+        message: 'error when create your account'
       });
     }
   } catch (error) {
+    console.log(error)
     return res.status(400).json({
-      message: 'There was a problem creating your account.'
+      message: 'Lỗi tạo tài khoản'
     });
   }
 };

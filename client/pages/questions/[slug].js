@@ -42,7 +42,6 @@ const QuestionDetail = ({ questionId, title }) => {
   }
 
   const isClient = typeof window === 'object'
-
   return (
     <Layout extra={false}>
       <Head>
@@ -74,7 +73,8 @@ const QuestionDetail = ({ questionId, title }) => {
                 created={question.created}
                 questionId={questionId}
               >
-                {question.text}
+                {/* {question.text} */}
+                <div dangerouslySetInnerHTML={{ __html: question.text }} />
               </PostSummary>
               <CommentList questionId={questionId} setQuestion={setQuestion}>
                 {question.comments.map(({ id, author, created, body }) => (

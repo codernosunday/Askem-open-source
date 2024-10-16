@@ -101,7 +101,7 @@ const HomePage = () => {
                 author={author}
                 createdTime={created}
               >
-                {text}
+                <div dangerouslySetInnerHTML={{ __html: text }} />
               </QuestionSummary>
             </QuestionWrapper>
           )

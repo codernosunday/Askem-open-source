@@ -1,5 +1,6 @@
 .container {
   padding: 24px 12px 24px 24px;
+  color: var(--TextWhite-100);
 }
 
 .borderBottom {
@@ -32,6 +33,7 @@
 
   button {
     flex-shrink: 0;
+
     @media (max-width: 1200px) {
       margin-bottom: 10px;
     }

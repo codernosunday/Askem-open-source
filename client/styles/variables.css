@@ -1,6 +1,6 @@
 :root {
   --white: #fff;
-  --orange: #f48024;
+
   --black-025: #fafafb;
   --black-050: #eff0f1;
   --black-075: #e4e6e8;
@@ -28,6 +28,14 @@
   --powder-600: #5b8db1;
   --powder-700: #39739d;
   --powder-800: #2c5777;
-
+  /*Custom*/
+  --orange: #03346E;
+  --blueDark: #03346E;
+  --TextWhite-100: #ECDFCC;
+  --TextWhite-200: #fafafb;
+  --BlackBG-100: #181C14;
+  --Gray-100: #3C3D37;
+  --GrayBorder-100: #697565;
+  /*Custom*/
   --fade: 120ms;
 }

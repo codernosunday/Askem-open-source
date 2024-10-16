@@ -7,21 +7,21 @@ import { FetchContext } from '../../../store/fetch'
 
 import Button from '../../button'
 import Textarea from '../../textarea'
+import TextAreaUpdate from '../../text-area-update'
 import FormInput from '../../form-input'
 import TagInput from '../../tag-input'
-
 import styles from './question-form.module.css'
 
 const QuestionForm = () => {
   const router = useRouter()
   const { authAxios } = useContext(FetchContext)
-
   const [loading, setLoading] = useState(false)
-
+  const [value, setValue] = useState('')
   return (
     <Formik
       initialValues={{ title: '', text: '', tags: [] }}
       onSubmit={async (values, { setStatus, resetForm }) => {
+        values.text = value;
         setLoading(true)
         try {
           await authAxios.post('questions', values)
@@ -38,7 +38,6 @@ const QuestionForm = () => {
           .max(150, 'Title cannot be longer than 150 characters.')
           .min(15, 'Title must be at least 15 characters.'),
         text: Yup.string()
-          .required('Body is missing.')
           .min(30, 'Body must be at least 30 characters.')
           .max(30000, 'Body cannot be longer than 30000 characters.'),
         tags: Yup.array()
@@ -73,14 +72,15 @@ const QuestionForm = () => {
               errorMessage={errors.title && errors.title}
               placeholder="e.g Is there an R function for finding the index of an element in a vendor?"
             />
-            <Textarea
-              label="Body"
+            <TextAreaUpdate
+              label="Question"
               inputInfo="Include all the information someone would need to answer your question"
               name="text"
               autoComplete="off"
-              value={values.text}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={value}
+              // onChange={handleChange}
+              setValue={setValue}
+              // onBlur={handleBlur}
               hasError={touched.text && errors.text}
               errorMessage={errors.text && errors.text}
             />
