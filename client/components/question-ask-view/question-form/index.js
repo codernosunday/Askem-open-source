@@ -6,7 +6,8 @@ import * as Yup from 'yup'
 import { FetchContext } from '../../../store/fetch'
 
 import Button from '../../button'
-import Textarea from '../../textarea'
+// import Textarea from '../../textarea'
+import InputImage from '../../input-image'
 import TextAreaUpdate from '../../text-area-update'
 import FormInput from '../../form-input'
 import TagInput from '../../tag-input'
@@ -17,11 +18,13 @@ const QuestionForm = () => {
   const { authAxios } = useContext(FetchContext)
   const [loading, setLoading] = useState(false)
   const [value, setValue] = useState('')
+  const [imageBase64, setImageBase64] = useState(null)
   return (
     <Formik
-      initialValues={{ title: '', text: '', tags: [] }}
+      initialValues={{ title: '', text: '', image: '', tags: [] }}
       onSubmit={async (values, { setStatus, resetForm }) => {
         values.text = value;
+        values.image = imageBase64;
         setLoading(true)
         try {
           await authAxios.post('questions', values)
@@ -37,9 +40,10 @@ const QuestionForm = () => {
           .required('Title is missing.')
           .max(150, 'Title cannot be longer than 150 characters.')
           .min(15, 'Title must be at least 15 characters.'),
-        text: Yup.string()
-          .min(30, 'Body must be at least 30 characters.')
-          .max(30000, 'Body cannot be longer than 30000 characters.'),
+        // text: Yup.string()
+        //   .required('Need text')
+        //   .min(30, 'Body must be at least 30 characters.')
+        //   .max(30000, 'Body cannot be longer than 30000 characters.'),
         tags: Yup.array()
           .required('Please enter at least one tag.')
           .max(5, 'Please enter no more than 5 tags.')
@@ -83,6 +87,10 @@ const QuestionForm = () => {
               // onBlur={handleBlur}
               hasError={touched.text && errors.text}
               errorMessage={errors.text && errors.text}
+            />
+            <InputImage
+              imageBase64={imageBase64}
+              setImageBase64={setImageBase64}
             />
             <TagInput
               label="Tags"

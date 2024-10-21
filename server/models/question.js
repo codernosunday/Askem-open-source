@@ -14,6 +14,7 @@ const questionSchema = new Schema({
   title: { type: String, required: true },
   text: { type: String, required: true },
   tags: [{ type: String, required: true }],
+  image: { type: String, required: false },
   score: { type: Number, default: 0 },
   votes: [voteSchema],
   comments: [commentSchema],

@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+    input[type="file"] {
+        display: none;
+    }
+
+}
+
+.uploadBox {
+    padding: 20px;
+    border: 2px dashed #aaa;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.uploadBox:hover {
+    background-color: #f1f1f1;
+}
+
+.uploadLabel {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.previewImage {
+    max-width: 300px;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

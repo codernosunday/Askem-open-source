@@ -22,12 +22,13 @@ exports.createQuestion = async (req, res, next) => {
     return res.status(422).json({ errors });
   }
   try {
-    const { title, tags, text } = req.body;
+    const { title, tags, image, text } = req.body;
     const author = req.user.id;
     const question = await Question.create({
       title,
       author,
       tags,
+      image,
       text
     });
     res.status(201).json(question);
