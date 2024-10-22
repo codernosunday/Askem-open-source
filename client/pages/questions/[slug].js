@@ -13,6 +13,8 @@ import CommentList from '../../components/post/comment-list'
 import CommentItem from '../../components/post/comment-list/comment-item'
 import AnswerContainer from '../../components/answer-container'
 import AddAnswer from '../../components/add-answer'
+//
+import Image from '../../components/image-question'
 import { Spinner } from '../../components/icons'
 
 const QuestionDetail = ({ questionId, title }) => {
@@ -75,6 +77,7 @@ const QuestionDetail = ({ questionId, title }) => {
               >
                 {/* {question.text} */}
                 <div dangerouslySetInnerHTML={{ __html: question.text }} />
+                {question.image && <Image base64String={question.image} altText='Image' />}
               </PostSummary>
               <CommentList questionId={questionId} setQuestion={setQuestion}>
                 {question.comments.map(({ id, author, created, body }) => (
