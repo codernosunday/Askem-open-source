@@ -62,19 +62,25 @@ const Header = ({ className, ...props }) => {
                 <a>{authState.userInfo.username}!</a>
               </Link>
             </p>
-            <a onClick={() => logout()}>log out</a>
+            <Button
+              className={styles.btnlogout} // Đảm bảo className được cập nhật
+              primary
+              onClick={() => logout()}
+            >
+              <span>Log Out</span> {/* Đặt nội dung trong một span để áp dụng kiểu */}
+            </Button>
           </div>
         ) : (
           <>
             <Button
-              className={styles.auth}
+              className={styles.btnlogout}
               secondary
               onClick={() => handleComponentVisible(true, 'login')}
             >
               Log in
             </Button>
             <Button
-              className={styles.auth}
+              className={styles.btnlogout}
               primary
               onClick={() => handleComponentVisible(true, 'signup')}
             >
@@ -83,10 +89,8 @@ const Header = ({ className, ...props }) => {
           </>
         )}
       </div>
-
       <div ref={ref}>{isComponentVisible && <NavigationDropdown />}</div>
     </header>
   )
 }
-
 export default Header

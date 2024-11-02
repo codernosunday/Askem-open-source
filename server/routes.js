@@ -22,6 +22,11 @@ const {
   createAnswer,
   removeAnswer
 } = require('./controllers/answers');
+const {
+  createGroup,
+  validateGroup,
+  listGroup
+} = require('./controllers/groups')
 const { listPopulerTags, searchTags, listTags } = require('./controllers/tags');
 const { upvote, downvote, unvote } = require('./controllers/votes');
 const { loadComments, validate, createComment, removeComment } = require('./controllers/comments');
@@ -71,7 +76,9 @@ router.param('comment', loadComments);
 router.post('/comment/:question/:answer?', [requireAuth, validate], createComment);
 router.delete('/comment/:question/:comment', [requireAuth, commentAuth], removeComment);
 router.delete('/comment/:question/:answer/:comment', [requireAuth, commentAuth], removeComment);
-
+// groups
+router.post('/group', [requireAuth, validateGroup], createGroup)
+router.get('/groups', listGroup)
 module.exports = (app) => {
   app.use('/api', router);
 

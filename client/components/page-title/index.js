@@ -18,7 +18,7 @@ const PageTitle = ({ title, button, borderBottom = true, children }) => {
           {button && (
             <Button
               href={isAuthenticated() ? '/questions/ask' : '/auth'}
-              primary
+              className={styles.btndatcauhoi}
             >
               Ask Question
             </Button>
@@ -26,7 +26,7 @@ const PageTitle = ({ title, button, borderBottom = true, children }) => {
         </div>
       </div>
       {children && <p className={styles.summary}>{children}</p>}
-      
+
     </div>
   )
 }

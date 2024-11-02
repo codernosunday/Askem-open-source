@@ -8,12 +8,12 @@ const Tag = ({ children, className, count, ...props }) => {
   return count ? (
     <div>
       <Link href={{ pathname: '/', query: { tag: children } }}>
-        <a className={cn(styles.tag, className)} {...props}>
+        <a className={cn(styles.taglayout, className)} {...props}>
           {children}
         </a>
       </Link>
-      <span className={styles.multiplier}>×</span>
-      &nbsp;
+      {/* <span className={styles.multiplier}>×:</span> 
+      &nbsp; */}
       <span className={styles.count}>{count}</span>
     </div>
   ) : (

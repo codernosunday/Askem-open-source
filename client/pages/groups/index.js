@@ -10,39 +10,24 @@ import { Spinner } from '../../components/icons'
 
 function Groups() {
     const [searchTerm, setSearchTerm] = useState(null)
-    const [users, setUsers] = useState(null)
+    const [groups, setGroups] = useState(null)
     const [loading, setLoading] = useState(false)
-
     useEffect(() => {
         if (searchTerm === null) {
-            const fetchUser = async () => {
-                const { data } = await publicFetch.get('/users')
-                setUsers(data)
+            const fetchGroup = async () => {
+                const { data } = await publicFetch.get('/groups')
+                setGroups(data);
             }
-
-            fetchUser()
-        } else {
-            const delayDebounceFn = setTimeout(async () => {
-                setLoading(true)
-                const { data } = await publicFetch.get(
-                    searchTerm ? `/users/${searchTerm}` : `/users`
-                )
-                setUsers(data)
-                setLoading(false)
-            }, 500)
-
-            return () => clearTimeout(delayDebounceFn)
+            fetchGroup()
         }
     }, [searchTerm])
-
     return (
         <Layout extra={false}>
             <Head>
                 <title>Groups - Askem</title>
             </Head>
 
-            <PageTitle title="Groups" borderBottom={false} />
-
+            <PageTitle title="Groups" borderBottom={false} group={true} />
             <SearchInput
                 placeholder="Search Group"
                 isLoading={loading}
@@ -52,7 +37,7 @@ function Groups() {
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
 
-            {!users && (
+            {!groups && (
                 <div className="loading">
                     <Spinner />
                 </div>
