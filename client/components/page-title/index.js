@@ -7,7 +7,7 @@ import Button from '../button'
 
 import styles from './page-title.module.css'
 
-const PageTitle = ({ title, button, borderBottom = true, children }) => {
+const PageTitle = ({ title, button, borderBottom = true, group = false, linkRoute = false, children }) => {
   const { isAuthenticated } = useContext(AuthContext)
 
   return (
@@ -21,6 +21,22 @@ const PageTitle = ({ title, button, borderBottom = true, children }) => {
               className={styles.btndatcauhoi}
             >
               Ask Question
+            </Button>
+          )}
+          {group && (
+            <Button
+              href={isAuthenticated() ? '/groups/createGroup' : '/auth'}
+              className={styles.btndatcauhoi}
+            >
+              Create group
+            </Button>
+          )}
+          {linkRoute && (
+            <Button
+              href={isAuthenticated() ? linkRoute : '/auth'}
+              className={styles.btndatcauhoi}
+            >
+              Ask question
             </Button>
           )}
         </div>

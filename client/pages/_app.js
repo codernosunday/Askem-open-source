@@ -7,7 +7,7 @@ import ModalContext from '../store/modal'
 import { AuthProvider } from '../store/auth'
 import { FetchProvider } from '../store/fetch'
 import { TagProvider } from '../store/tag'
-
+import { GroupAuthProvider } from '../store/groupauth'
 import Modal from '../components/modal'
 import AuthForms from '../components/auth-forms'
 
@@ -40,14 +40,16 @@ function MyApp({ Component, pageProps }) {
     >
       <AuthProvider>
         <FetchProvider>
-          <TagProvider>
-            <Component {...pageProps} />
-            {isComponentVisible && (
-              <Modal>
-                <AuthForms screen={authScreen} />
-              </Modal>
-            )}
-          </TagProvider>
+          <GroupAuthProvider>
+            <TagProvider>
+              <Component {...pageProps} />
+              {isComponentVisible && (
+                <Modal>
+                  <AuthForms screen={authScreen} />
+                </Modal>
+              )}
+            </TagProvider>
+          </GroupAuthProvider>
         </FetchProvider>
       </AuthProvider>
     </ModalContext.Provider>

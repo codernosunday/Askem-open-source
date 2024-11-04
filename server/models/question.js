@@ -12,6 +12,7 @@ const questionSchema = new Schema({
     required: true
   },
   title: { type: String, required: true },
+  ingroup: { type: String, required: false, default: false },
   text: { type: String, required: true },
   tags: [{ type: String, required: true }],
   image: { type: String, required: false },
@@ -52,7 +53,6 @@ questionSchema.methods = {
       this.score += vote;
       this.votes.push({ user, vote });
     }
-
     return this.save();
   },
 

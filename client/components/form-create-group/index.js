@@ -18,7 +18,7 @@ const FormCreateGroup = () => {
                 try {
                     await authAxios.post('group', values)
                     resetForm({})
-                    router.push('/')
+                    router.push('/groups')
                 } catch (error) {
                     setStatus(error.response.data.message)
                 }

@@ -1,4 +1,5 @@
 const Question = require('../models/question');
+const { Group } = require('../models/group');
 const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 
@@ -14,7 +15,6 @@ exports.loadQuestions = async (req, res, next, id) => {
   }
   next();
 };
-
 exports.createQuestion = async (req, res, next) => {
   const result = validationResult(req);
   if (!result.isEmpty()) {
@@ -22,21 +22,28 @@ exports.createQuestion = async (req, res, next) => {
     return res.status(422).json({ errors });
   }
   try {
-    const { title, tags, image, text } = req.body;
+    const { title, tags, image, text, ingroup } = req.body;
     const author = req.user.id;
     const question = await Question.create({
       title,
       author,
+      ingroup,
       tags,
       image,
       text
     });
     res.status(201).json(question);
+    if (ingroup) {
+      const groupadd = await Group.findOne({ name: ingroup })
+      if (groupadd) {
+        groupadd.addWaitList(question.id)
+      }
+
+    }
   } catch (error) {
     next(error);
   }
 };
-
 exports.show = async (req, res, next) => {
   try {
     const { id } = req.question;

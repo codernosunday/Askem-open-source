@@ -33,6 +33,45 @@ exports.listGroup = async (req, res, next) => {
         next(error)
     }
 }
+exports.searchGroup = async (req, res, next) => {
+    try {
+        const group = await Group.find({ name: { $regex: req.params.search, $options: 'i' } });
+        res.json(group);
+    } catch (error) {
+        next(error);
+    }
+};
+exports.findGroup = async (req, res, next) => {
+    try {
+        const group = await Group.findOne({ name: req.params.name });
+        res.json(group);
+    } catch (error) {
+        next(error);
+    }
+}
+// create question group
+exports.createQuestionGroup = async (req, res, next) => {
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+        const errors = result.array({ onlyFirstError: true });
+        return res.status(422).json({ errors });
+    }
+    try {
+        const { title, tags, image, text } = req.body;
+        const author = req.user.id;
+        const question = await Question.create({
+            title,
+            author,
+            tags,
+            image,
+            text
+        });
+        res.status(201).json(question);
+    } catch (error) {
+        next(error);
+    }
+};
+//
 exports.validateGroup = [
     body('name')
         .exists()

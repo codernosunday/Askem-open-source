@@ -14,7 +14,8 @@ const {
   listQuestions,
   listByTags,
   listByUser,
-  removeQuestion
+  removeQuestion,
+  createQuestionGroup
 } = require('./controllers/questions');
 const {
   loadAnswers,
@@ -25,7 +26,9 @@ const {
 const {
   createGroup,
   validateGroup,
-  listGroup
+  listGroup,
+  searchGroup,
+  findGroup
 } = require('./controllers/groups')
 const { listPopulerTags, searchTags, listTags } = require('./controllers/tags');
 const { upvote, downvote, unvote } = require('./controllers/votes');
@@ -35,6 +38,7 @@ const requireAuth = require('./middlewares/requireAuth');
 const questionAuth = require('./middlewares/questionAuth');
 const commentAuth = require('./middlewares/commentAuth');
 const answerAuth = require('./middlewares/answerAuth');
+const groupAuth = require('./middlewares/groupAuth')
 
 const router = require('express').Router();
 
@@ -79,6 +83,9 @@ router.delete('/comment/:question/:answer/:comment', [requireAuth, commentAuth],
 // groups
 router.post('/group', [requireAuth, validateGroup], createGroup)
 router.get('/groups', listGroup)
+router.get('/groups/:search', searchGroup)
+router.get('/group/:name', findGroup);
+//
 module.exports = (app) => {
   app.use('/api', router);
 
